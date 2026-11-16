@@ -1,7 +1,7 @@
 import json, os, urllib.request
 from datetime import datetime, timezone, timedelta
 
-KEY = os.environ["API_FOOTBALL_KEY"]
+KEY = os.environ["API_FOOTBALL_KEY"].strip()
 TEAM, LEAGUE, SEASON = 435, 128, 2026  # River Plate, Liga Profesional, temporada
 BASE = "https://v3.football.api-sports.io"
 DIAS = ["lunes","martes","miércoles","jueves","viernes","sábado","domingo"]
