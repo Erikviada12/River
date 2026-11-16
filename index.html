@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>River Plate · Info del día</title>
+<style>
+:root{--bg:#f6f6f6;--card:#fff;--tx:#111;--mut:#666;--red:#d4111e;--bd:#e3e3e3;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101010;--card:#1b1b1b;--tx:#f2f2f2;--mut:#a0a0a0;--bd:#2d2d2d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101010;--card:#1b1b1b;--tx:#f2f2f2;--mut:#a0a0a0;--bd:#2d2d2d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45}
+header{background:var(--red);color:#fff;padding:22px 16px;text-align:center}
+header h1{margin:0;font-size:1.6rem}
+header p{margin:4px 0 0;opacity:.9;font-size:.9rem}
+main{max-width:720px;margin:0 auto;padding:16px;display:grid;gap:14px}
+section{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px}
+h2{margin:0 0 10px;font-size:1.05rem;color:var(--red)}
+.big{font-size:1.4rem;font-weight:700}
+.mut{color:var(--mut);font-size:.9rem}
+.row{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--bd)}
+.row:first-of-type{border-top:0}
+.tag{font-weight:700;border-radius:6px;padding:0 8px;color:#fff}
+.G{background:#1a9b4b}.E{background:#888}.P{background:#d4111e}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.stats b{display:block;font-size:1.3rem}
+ul{margin:0;padding-left:18px}
+footer{text-align:center;color:var(--mut);font-size:.8rem;padding:8px 16px 24px}
+</style>
+</head>
+<body>
+<header><h1>⚪🔴 River Plate</h1><p id="upd"></p></header>
+<main>
+<section><h2>Próximo partido</h2><div class="big" id="next"></div><div class="mut" id="nextInfo"></div></section>
+<section><h2>Posición · Torneo Clausura 2026 (Zona B)</h2><div class="stats" id="stats"></div><p class="mut" id="posNote"></p></section>
+<section><h2>Últimos resultados</h2><div id="res"></div></section>
+<section><h2>Camino en los playoffs</h2><ul id="path"></ul></section>
+<section><h2>Novedades</h2><ul id="news"></ul></section>
+</main>
+<footer>Página no oficial · Datos actualizados automáticamente cada día</footer>
+<script>
+/* ===== EDITAR SOLO ESTE BLOQUE PARA ACTUALIZAR ===== */
+const DATA={
+ actualizado:"16/11/2026",
+ proximo:{titulo:"River vs. Lanús",info:"Octavos de final · Torneo Clausura · Estadio Monumental · Domingo 22/11"},
+ pos:{puesto:"4.º",pts:26,pj:16,dg:"+7"},
+ posNota:"8 ganados, 2 empatados y 6 perdidos. Clasificado a los playoffs.",
+ resultados:[
+  {f:"05/11",rival:"Aldosivi (V)",marcador:"2-0",r:"G"},
+  {f:"01/11",rival:"Boca (V)",marcador:"0-1",r:"P"},
+  {f:"25/10",rival:"Racing (L)",marcador:"1-0",r:"G"},
+  {f:"18/10",rival:"Belgrano (V)",marcador:"3-0",r:"G"},
+  {f:"14/10",rival:"Sarmiento (V)",marcador:"1-1",r:"E"}
+ ],
+ camino:["Octavos: vs. Lanús (en el Monumental)","Cuartos de final: fin de semana del 29/11","Semifinales: fin de semana del 6/12","Final: sábado 12/12 en La Plata"],
+ novedades:["Ponzio entrena con doble turno durante la fecha FIFA","Se habla de las ausencias de Vera, Moreno y Montiel para el cruce con Lanús","Hay un amistoso confirmado antes de los octavos"]
+};
+/* ===== FIN DEL BLOQUE ===== */
+const $=id=>document.getElementById(id);
+function render(){
+$("upd").textContent="Actualizado el "+DATA.actualizado;
+$("next").textContent=DATA.proximo.titulo;
+$("nextInfo").textContent=DATA.proximo.info;
+$("stats").innerHTML=[["Puesto",DATA.pos.puesto],["Puntos",DATA.pos.pts],["Partidos",DATA.pos.pj],["Dif. gol",DATA.pos.dg]].map(([a,b])=>"<div><b>"+b+"</b><span class='mut'>"+a+"</span></div>").join("");
+$("posNote").textContent=DATA.posNota;
+$("res").innerHTML=DATA.resultados.map(x=>"<div class='row'><span>"+x.f+" · "+x.rival+"</span><span><b>"+x.marcador+"</b> <span class='tag "+x.r+"'>"+x.r+"</span></span></div>").join("");
+$("path").innerHTML=DATA.camino.map(t=>"<li>"+t+"</li>").join("");
+$("news").innerHTML=DATA.novedades.map(t=>"<li>"+t+"</li>").join("");
+}
+render();
+fetch("data.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{if(j){Object.assign(DATA,j);render();}}).catch(()=>{});
+</script>
+</body>
+</html>

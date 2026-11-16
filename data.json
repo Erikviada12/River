@@ -1,0 +1,15 @@
+{
+ "actualizado": "16/11/2026",
+ "proximo": {"titulo": "River vs. Lanús", "info": "Octavos de final · Torneo Clausura · Estadio Monumental · Domingo 22/11"},
+ "pos": {"puesto": "4.º", "pts": 26, "pj": 16, "dg": "+7"},
+ "posNota": "8 ganados, 2 empatados y 6 perdidos. Clasificado a los playoffs.",
+ "resultados": [
+  {"f":"05/11","rival":"Aldosivi (V)","marcador":"2-0","r":"G"},
+  {"f":"01/11","rival":"Boca (V)","marcador":"0-1","r":"P"},
+  {"f":"25/10","rival":"Racing (L)","marcador":"1-0","r":"G"},
+  {"f":"18/10","rival":"Belgrano (V)","marcador":"3-0","r":"G"},
+  {"f":"14/10","rival":"Sarmiento (V)","marcador":"1-1","r":"E"}
+ ],
+ "camino": ["Octavos: vs. Lanús (en el Monumental)","Cuartos de final: fin de semana del 29/11","Semifinales: fin de semana del 6/12","Final: sábado 12/12 en La Plata"],
+ "novedades": ["Ponzio entrena con doble turno durante la fecha FIFA","Se habla de las ausencias de Vera, Moreno y Montiel para el cruce con Lanús"]
+}
